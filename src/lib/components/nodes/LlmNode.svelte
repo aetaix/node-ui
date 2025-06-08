@@ -5,24 +5,20 @@
 		useNodeConnections,
 		Handle,
 		Position,
+		NodeResizeControl,
 		type NodeProps
 	} from '@xyflow/svelte';
-	import { ArrowUp} from '@lucide/svelte';
-	// Components
+	import { ArrowUp } from '@lucide/svelte';
+
 	import ModelPicker from '$lib/components/ui/model-picker/ModelPicker.svelte';
 	import NodeTypePicker from '../ui/node-type-picker/NodeTypePicker.svelte';
 
-	// Data
 	const sources = useNodeConnections({ handleId: 'sources', handleType: 'target' });
 	let { id, type, data, positionAbsoluteX, positionAbsoluteY }: NodeProps = $props();
 
-	let prompt = $state('');
-
-	// Node functions
 	const nodes = useNodes();
 	const edges = useEdges();
-
-	$inspect(id, sources);
+	let prompt = $state('');
 
 	function generate(e: Event) {
 		e.preventDefault();
@@ -56,7 +52,8 @@
 		const newEdge = {
 			id: crypto.randomUUID(),
 			source: id,
-			target: newId
+			target: newId,
+			animated: true
 		};
 		nodes.set([...nodes.current, newNode]);
 		edges.set([...edges.current, newEdge]);
@@ -66,7 +63,7 @@
 </script>
 
 <div
-	class="max-w-[600px] w-full min-w-[300px] divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white shadow-md"
+	class="w-full h-full flex flex-col divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white shadow-md"
 >
 	<div class="flex items-center justify-between p-3">
 		<NodeTypePicker {id} {type} />
@@ -93,7 +90,7 @@
 			<span class="text-gray-400">No sources</span>
 		{/if}
 	</div>
-	<form class="p-3" onsubmit={generate}>
+	<form class="p-3 h-full flex-gro flex flex-col" onsubmit={generate}>
 		<textarea
 			onkeydown={(e) => {
 				if (e.key === 'Enter' && !e.shiftKey) {
@@ -101,8 +98,7 @@
 				}
 			}}
 			bind:value={prompt}
-			class="nodrag w-full border-none focus:outline-none"
-			rows="4"
+			class="nodrag w-full h-full resize-none border-none focus:outline-none"
 			placeholder="Enter your prompt here"
 		></textarea>
 		<div class="flex justify-end">
@@ -114,5 +110,8 @@
 			</button>
 		</div>
 	</form>
-	<Handle id="response" type="source" position={Position.Right} />
+
 </div>
+	<Handle id="response" type="source" position={Position.Right} />
+	<NodeResizeControl minWidth={300} maxWidth={600} minHeight={200} maxHeight={400}
+	></NodeResizeControl>
