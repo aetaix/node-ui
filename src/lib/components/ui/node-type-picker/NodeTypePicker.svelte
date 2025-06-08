@@ -9,10 +9,7 @@
 	}
 </script>
 
-<select 
-class="nodrag"
-value={type}
-onchange={handleChange}>
+<select class="nodrag" value={type} onchange={handleChange}>
 	<option value="system">System</option>
 	<option value="content">Content</option>
 	<option value="llm">Llm</option>

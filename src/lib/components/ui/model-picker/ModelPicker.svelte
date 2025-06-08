@@ -12,7 +12,7 @@
 	let { id } = $props();
 	const models = getContext<ModelResponse[]>('models');
 
-	let value = $state('');
+	let value = $state(models[0].name);
 	let open = $state(false);
 	let triggerRef = $state<HTMLButtonElement>(null!);
 
