@@ -6,11 +6,15 @@
 	import { useSvelteFlow } from '@xyflow/svelte';
 	import { CheckIcon, ChevronsUpDownIcon } from '@lucide/svelte';
 
+	interface ModelWithLabel extends ModelResponse {
+		label: string;
+	}
+
 	import * as Command from '$lib/components/ui/command/index.js';
 	import * as Popover from '$lib/components/ui/popover/index.js';
 
 	let { id } = $props();
-	const models = getContext<ModelResponse[]>('models');
+	const models = getContext<ModelResponse[]>('models') as ModelWithLabel[];
 
 	let value = $state(models[0].name);
 	let open = $state(false);
@@ -18,7 +22,7 @@
 
 	let { updateNodeData } = useSvelteFlow();
 
-	const selectedValue = $derived(models.find((model: any) => model.name === value)?.name);
+	const selectedValue = $derived(models.find((model: any) => model.name === value)?.label);
 
 	// We want to refocus the trigger button when the user selects
 	// an item from the list so users can continue navigating the
@@ -32,7 +36,7 @@
 </script>
 
 <Popover.Root bind:open>
-	<Popover.Trigger bind:ref={triggerRef} class="flex w-full items-center justify-between">
+	<Popover.Trigger bind:ref={triggerRef} class="flex w-full capitalize items-center justify-between">
 		{selectedValue || 'Select a model...'}
 		<ChevronsUpDownIcon class="ml-2 size-4 shrink-0 opacity-50" />
 	</Popover.Trigger>
@@ -45,6 +49,7 @@
 					{#each models as model}
 						<Command.Item
 							value={model.name}
+							class="capitalize"
 							onSelect={() => {
 								value = model.name;
 								updateNodeData(id, { model: model.name });
@@ -52,7 +57,7 @@
 							}}
 						>
 							<CheckIcon class={cn('mr-2 size-4', value !== model.name && 'text-transparent')} />
-							{model.name}
+							{model.label}
 						</Command.Item>
 					{/each}
 				</Command.Group>

@@ -4,7 +4,7 @@
 
 	import { setContext } from 'svelte';
 	let { children, data } = $props();
-	setContext('models', data.models?.models);
+	setContext('models', data.models);
 </script>
 
 {@render children()}
