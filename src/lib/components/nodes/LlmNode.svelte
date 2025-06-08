@@ -5,12 +5,10 @@
 		useNodeConnections,
 		Handle,
 		Position,
-		// useNodesData,
-		// useInternalNode,
 		useSvelteFlow,
 		type NodeProps
 	} from '@xyflow/svelte';
-	import { ArrowUp } from '@lucide/svelte';
+	import { ArrowUp, Plus } from '@lucide/svelte';
 	// Components
 	import ModelPicker from '$lib/components/ui/model-picker/ModelPicker.svelte';
 	import NodeTypePicker from '../ui/node-type-picker/NodeTypePicker.svelte';
@@ -80,8 +78,20 @@
 	</div>
 
 	<div class="p-3">
-		<Handle id="sources" type="target" position={Position.Left} class="custom-handle" />
-		{sources.current?.length > 0 ? sources.current.length + ' sources' : 'No sources'}
+		<Handle
+			id="sources"
+			type="target"
+			position={Position.Left}
+			style="top: 138px; left:-2px; height: 24px; width:24px; display:flex; justify-content:center; align-items: center; background-color: #fff; border: 1px solid #000;"
+		>
+			<Plus class="size-4" />
+		</Handle>
+
+		{#if sources.current?.length > 0}
+			{sources.current.length} source{sources.current.length > 1 ? 's' : ''}
+		{:else}
+			<span class="text-gray-400">No sources</span>
+		{/if}
 	</div>
 	<form class="p-3" onsubmit={generate}>
 		<textarea

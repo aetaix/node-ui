@@ -11,14 +11,14 @@
 	<div class="flex items-center justify-between p-3">
 		<NodeTypePicker {id} {type} />
 	</div>
-	<div class="nodrag noscroll">
+	<div class="nodrag nowheel rounded-b-xl bg-gray-50">
 		<!-- <MarkdownEditor {carta} bind:value /> -->
 		<textarea
 			oninput={(e) => updateNodeData(id, { content: (e.target as HTMLTextAreaElement).value })}
-			class="w-full p-3 focus:outline-none"
+			class="h-full w-full resize-none p-3 font-mono focus:outline-none"
 			placeholder="Type your content here..."
 		></textarea>
 	</div>
 
-	<Handle type="source" position={Position.Right} class="custom-handle" />
+	<Handle type="source" position={Position.Right} class="custom-handle" style="top:32px" />
 </div>
