@@ -5,18 +5,18 @@
 		useNodeConnections,
 		Handle,
 		Position,
-		useSvelteFlow,
 		type NodeProps
 	} from '@xyflow/svelte';
-	import { ArrowUp, Plus } from '@lucide/svelte';
+	import { ArrowUp} from '@lucide/svelte';
 	// Components
 	import ModelPicker from '$lib/components/ui/model-picker/ModelPicker.svelte';
 	import NodeTypePicker from '../ui/node-type-picker/NodeTypePicker.svelte';
 
 	// Data
-	let { updateNodeData } = useSvelteFlow();
 	const sources = useNodeConnections({ handleId: 'sources', handleType: 'target' });
 	let { id, type, data, positionAbsoluteX, positionAbsoluteY }: NodeProps = $props();
+
+	let prompt = $state('');
 
 	// Node functions
 	const nodes = useNodes();
@@ -29,7 +29,6 @@
 		const newId = crypto.randomUUID();
 
 		let system = data.system;
-		let prompt = '';
 
 		if (sources.current?.length > 0) {
 			sources.current.forEach((source) => {
@@ -47,8 +46,6 @@
 			});
 		}
 
-		prompt += data.prompt;
-
 		const newNode = {
 			id: newId,
 			type: 'response',
@@ -63,11 +60,13 @@
 		};
 		nodes.set([...nodes.current, newNode]);
 		edges.set([...edges.current, newEdge]);
+
+		prompt = '';
 	}
 </script>
 
 <div
-	class="max-w-[500px] min-w-[300px] divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white shadow-md"
+	class="max-w-[600px] w-full min-w-[300px] divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white shadow-md"
 >
 	<div class="flex items-center justify-between p-3">
 		<NodeTypePicker {id} {type} />
@@ -81,14 +80,15 @@
 		<Handle
 			id="sources"
 			type="target"
+			class="custom-handle"
 			position={Position.Left}
-			style="top: 138px; left:-2px; height: 24px; width:24px; display:flex; justify-content:center; align-items: center; background-color: #fff; border: 1px solid #000;"
-		>
-			<Plus class="size-4" />
-		</Handle>
+			style="top: 138px; background: #555"
+		/>
 
 		{#if sources.current?.length > 0}
-			{sources.current.length} source{sources.current.length > 1 ? 's' : ''}
+			<span class="rounded-full bg-blue-100 px-3 py-2 text-blue-500">
+				{sources.current.length} source{sources.current.length > 1 ? 's' : ''}</span
+			>
 		{:else}
 			<span class="text-gray-400">No sources</span>
 		{/if}
@@ -100,7 +100,7 @@
 					generate(e);
 				}
 			}}
-			oninput={(e) => updateNodeData(id, { prompt: (e.target as HTMLTextAreaElement).value })}
+			bind:value={prompt}
 			class="nodrag w-full border-none focus:outline-none"
 			rows="4"
 			placeholder="Enter your prompt here"
