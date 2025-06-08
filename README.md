@@ -6,6 +6,9 @@ With NodeUI, you can interact with LLMs using a node-based UI, where cards can b
 
 Built with SvelteKit, Svelte Flow, [Ollama](https://ollama.ai/), AI SDK, and Tailwind CSS.
 
+> [!WARNING]
+> This project is currently in an experimental phase and may contain bugs or undergo significant changes. Use at your own discretion.
+
 ## Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
