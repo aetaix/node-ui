@@ -24,6 +24,8 @@
 	const nodes = useNodes();
 	const edges = useEdges();
 
+	$inspect(id, sources);
+
 	function generate(e: Event) {
 		e.preventDefault();
 		const newId = crypto.randomUUID();
@@ -53,7 +55,7 @@
 			id: newId,
 			type: 'response',
 			position: { x: positionAbsoluteX + 350, y: positionAbsoluteY },
-			data: { system, model: data.model, prompt }
+			data: { system, model: data.model, prompt, content: '' }
 		};
 
 		const newEdge = {

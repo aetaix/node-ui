@@ -11,7 +11,7 @@
 	<div class="flex items-center justify-between p-3">
 		<NodeTypePicker {id} {type} />
 	</div>
-	<div class="nodrag noscroll">
+	<div class="nodrag nowheel">
 		<!-- <MarkdownEditor {carta} bind:value /> -->
 		<textarea
 			oninput={(e) => updateNodeData(id, { content: (e.target as HTMLTextAreaElement).value })}
