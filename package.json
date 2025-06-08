@@ -46,10 +46,10 @@
 		"zod": "^3.25.56"
 	},
 	"dependencies": {
+		"@humanspeak/svelte-markdown": "^0.8.7",
 		"@xyflow/svelte": "^1.0.2",
-		"carta-md": "^4.10.2",
-		"isomorphic-dompurify": "^2.25.0",
 		"ollama": "^0.5.16",
-		"ollama-ai-provider": "^1.2.0"
+		"ollama-ai-provider": "^1.2.0",
+		"svelte-highlight": "^7.8.3"
 	}
 }

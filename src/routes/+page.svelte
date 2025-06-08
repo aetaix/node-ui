@@ -4,9 +4,17 @@
 	import LlmNNode from '$lib/components/nodes/LlmNode.svelte';
 	import ResponseNode from '$lib/components/nodes/ResponseNode.svelte';
 	import ContentNode from '$lib/components/nodes/ContentNode.svelte';
+	import CodeNode from '$lib/components/nodes/CodeNode.svelte';
 	import SystemNode from '$lib/components/nodes/SystemNode.svelte';
+	import Dock from '$lib/components/Dock.svelte';
 
-	const nodeTypes = { content: ContentNode, llm: LlmNNode, response: ResponseNode, system: SystemNode  };
+	const nodeTypes = {
+		content: ContentNode,
+		llm: LlmNNode,
+		response: ResponseNode,
+		system: SystemNode,
+		code: CodeNode
+	};
 
 	const initialNodes = [
 		{
@@ -14,8 +22,7 @@
 			type: 'llm',
 			position: { x: 450, y: 0 },
 			data: { label: 'llm', model: '', prompt: '', system: '' }
-		},
-		
+		}
 	];
 
 	let nodes = $state.raw<Node[]>(initialNodes);
@@ -42,18 +49,7 @@
 		<Controls />
 
 		<Panel position="bottom-center">
-			<div class="rounded-2xl border border-gray-200 bg-white p-3 shadow">
-				<button class="rounded-lg bg-black px-4 py-3 text-white" onclick={() => addNode('llm')}
-					>Add LLM</button
-				>
-				<button class="rounded-lg bg-black px-4 py-3 text-white" onclick={() => addNode('content')}
-					>Add Prompt</button
-				>
-				<button class="rounded-lg bg-black px-4 py-3 text-white" onclick={() => addNode('system')}
-					>Add System</button
-				>
-			
-			</div>
+			<Dock {addNode} />
 		</Panel>
 	</SvelteFlow>
 </div>

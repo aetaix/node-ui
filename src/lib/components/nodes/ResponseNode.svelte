@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Carta, Markdown } from 'carta-md';
+	import SvelteMarkdown from '@humanspeak/svelte-markdown';
+
 	import { useSvelteFlow, Handle, Position } from '@xyflow/svelte';
 	import { Completion } from '@ai-sdk/svelte';
 	import { onMount } from 'svelte';
@@ -23,8 +24,6 @@
 			});
 		}
 	});
-
-	const carta = new Carta();
 
 	onMount(() => {
 		completion.complete(data.prompt);
@@ -52,9 +51,9 @@
 		{#if !completion.completion}
 			<div class="loader"></div>
 		{:else}
-			{#key completion.completion}
-				<Markdown {carta} value={completion.completion} />
-			{/key}
+			<div class="prose">
+				<SvelteMarkdown source={completion.completion} />
+			</div>
 		{/if}
 	</div>
 	<div class="flex items-center justify-end p-3">

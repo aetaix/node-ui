@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { useSvelteFlow } from '@xyflow/svelte';
 	import * as Select from '$lib/components/ui/select/index';
-	import { Bot, LetterText, FileCog } from '@lucide/svelte';
+	import { Bot, LetterText, FileCog, CodeXml } from '@lucide/svelte';
 	// Data
 	let { id, type } = $props();
 	let { updateNode } = useSvelteFlow();
@@ -9,6 +9,7 @@
 	const nodeTypes = [
 		{ value: 'system', label: 'System', icon: FileCog },
 		{ value: 'content', label: 'Content', icon: LetterText },
+		{ value: 'code' , label: 'Code', icon: CodeXml },
 		{ value: 'llm', label: 'LLM', icon: Bot }
 	];
 

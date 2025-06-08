@@ -133,13 +133,7 @@
   @apply w-2! h-4! rounded-none! bg-gray-400!;
 }
 
-/* Carta */
-.carta-toolbar {
-  @apply border-b border-gray-200 p-2;
-}
-.carta-wrapper {
-  @apply p-3 max-h-[300px] overflow-y-auto;
-}
+
 
 /* Loader */
 /* HTML: <div class="loader"></div> */
