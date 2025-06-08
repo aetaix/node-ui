@@ -1,18 +1,10 @@
-# sv
+# NodeUI
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+NodeUI is an experimental local web-based user interface designed to revolutionize the way you interact with Large Language Models (LLMs). While most AI interactions today are centered around chat interfaces, NodeUI aims to explore new possibilities.
 
-## Creating a project
+With NodeUI, you can interact with LLMs using a node-based UI, where cards can be connected to create a flow of information. This approach allows for a more organized and structured interaction with LLMs, opening up new avenues for creativity and efficiency.
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
+Built with SvelteKit, Svelte Flow, [Ollama](https://ollama.ai/), AI SDK, and Tailwind CSS.
 
 ## Developing
 
