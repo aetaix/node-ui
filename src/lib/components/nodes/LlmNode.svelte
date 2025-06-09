@@ -63,7 +63,7 @@
 </script>
 
 <div
-	class="w-full h-full flex flex-col divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white shadow-md"
+	class="flex h-full w-full flex-col divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white shadow-md"
 >
 	<div class="flex items-center justify-between p-3">
 		<NodeTypePicker {id} {type} />
@@ -90,7 +90,7 @@
 			<span class="text-gray-400">No sources</span>
 		{/if}
 	</div>
-	<form class="p-3 h-full flex-gro flex flex-col" onsubmit={generate}>
+	<form class="flex-gro flex h-full flex-col p-3" onsubmit={generate}>
 		<textarea
 			onkeydown={(e) => {
 				if (e.key === 'Enter' && !e.shiftKey) {
@@ -98,20 +98,30 @@
 				}
 			}}
 			bind:value={prompt}
-			class="nodrag w-full h-full resize-none border-none focus:outline-none"
+			class="nodrag h-full w-full resize-none border-none focus:outline-none"
 			placeholder="Enter your prompt here"
 		></textarea>
+
 		<div class="flex justify-end">
-			<button
-				type="submit"
-				class="flex size-8 items-center justify-center rounded-lg bg-black text-white"
-			>
-				<ArrowUp class="size-5" />
-			</button>
+			{#if prompt || sources.current?.length > 0}
+				<button
+					type="submit"
+					class="flex size-8 items-center justify-center rounded-lg bg-black text-white"
+				>
+					<ArrowUp class="size-5" />
+				</button>
+			{:else}
+				<button
+					type="button"
+					class="flex size-8 items-center justify-center rounded-lg bg-gray-200 text-gray-400"
+					disabled
+				>
+					<ArrowUp class="size-5" />
+				</button>
+			{/if}
 		</div>
 	</form>
-
 </div>
-	<Handle id="response" type="source" position={Position.Right} />
-	<NodeResizeControl minWidth={300} maxWidth={600} minHeight={200} maxHeight={400}
-	></NodeResizeControl>
+<Handle id="response" type="source" position={Position.Right} />
+<NodeResizeControl minWidth={300} maxWidth={600} minHeight={200} maxHeight={400}
+></NodeResizeControl>
