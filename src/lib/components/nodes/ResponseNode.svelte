@@ -75,7 +75,7 @@
 	minWidth={300}
 	maxWidth={600}
 	minHeight={140}
-	maxHeight={400}
+	maxHeight={800}
 	color="#4480FF"
 	class="rounded-4xl"
 	handleStyle="width: 14px; height: 14px; background: rgb(255, 64, 0); border-radius: 8px; border: 2px solid white;"

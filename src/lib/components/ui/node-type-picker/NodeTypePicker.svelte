@@ -3,7 +3,7 @@
 	import * as Select from '$lib/components/ui/select/index';
 	import { Bot, LetterText, FileCog, CodeXml } from '@lucide/svelte';
 	// Data
-	let { id, type } = $props();
+	let { id, type, ...props } = $props();
 	let { updateNode } = useSvelteFlow();
 
 	const nodeTypes = [
@@ -23,7 +23,7 @@
 </script>
 
 <Select.Root type="single" name="nodeType" onValueChange={handleChange}>
-	<Select.Trigger class="w-fit rounded-full flex gap-2 items-center">
+	<Select.Trigger class="w-fit rounded-full flex gap-2 items-center {props.class}">
 		{#if currentNodeType}
 			<currentNodeType.icon size={20} />
 			{currentNodeType.label}

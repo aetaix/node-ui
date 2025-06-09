@@ -47,10 +47,13 @@
 	},
 	"dependencies": {
 		"@ai-sdk/mistral": "^1.2.8",
+		"@codemirror/lang-javascript": "^6.2.4",
 		"@humanspeak/svelte-markdown": "^0.8.7",
 		"@xyflow/svelte": "^1.0.2",
 		"ollama": "^0.5.16",
 		"ollama-ai-provider": "^1.2.0",
-		"svelte-highlight": "^7.8.3"
+		"svelte-codemirror-editor": "^1.4.1",
+		"svelte-highlight": "^7.8.3",
+		"thememirror": "^2.0.1"
 	}
 }
