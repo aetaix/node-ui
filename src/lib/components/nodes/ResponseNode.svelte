@@ -35,10 +35,10 @@
 </script>
 
 <div
-	class="w-full max-w-[500px] min-w-[300px] divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white shadow-md"
+	class="w-full max-w-[500px] min-w-[300px] rounded-xl border border-gray-200 bg-white shadow-md"
 >
 	<Handle type="target" position={Position.Left} />
-	<div class="flex items-center justify-between p-3">
+	<div class="flex items-center justify-between p-3 border-b border-neutral-200">
 		<button
 			class="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 text-sm shadow"
 		>
@@ -49,7 +49,10 @@
 
 	<div class="nodrag nowheel max-h-[300px] overflow-y-auto p-3">
 		{#if !completion.completion}
-			<div class="loader"></div>
+			<div class="flex gap-2 items-center text-gray-400">
+				<div class="loader"></div>
+				<span>Loading model</span>
+			</div>
 		{:else}
 			<div class="prose">
 				<SvelteMarkdown source={completion.completion} />

@@ -5,16 +5,13 @@
 	import { type ModelResponse } from 'ollama';
 	import { useSvelteFlow } from '@xyflow/svelte';
 	import { CheckIcon, ChevronsUpDownIcon } from '@lucide/svelte';
-
-	interface ModelWithLabel extends ModelResponse {
-		label: string;
-	}
+	import type { Model } from '$lib/models/types';
 
 	import * as Command from '$lib/components/ui/command/index.js';
 	import * as Popover from '$lib/components/ui/popover/index.js';
 
 	let { id } = $props();
-	const models = getContext<ModelResponse[]>('models') as ModelWithLabel[];
+	const models = getContext<ModelResponse[]>('models') as Model[];
 
 	let value = $state(models[0].name);
 	let open = $state(false);
@@ -52,7 +49,7 @@
 							class="capitalize"
 							onSelect={() => {
 								value = model.name;
-								updateNodeData(id, { model: model.name });
+								updateNodeData(id, { model });
 								closeAndFocusTrigger();
 							}}
 						>
