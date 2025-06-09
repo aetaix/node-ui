@@ -1,14 +1,14 @@
 <script lang="ts">
 	import SvelteMarkdown from '@humanspeak/svelte-markdown';
 
-	import { useSvelteFlow, Handle, Position } from '@xyflow/svelte';
+	import { useSvelteFlow, Handle, Position, NodeResizer } from '@xyflow/svelte';
 	import { Completion } from '@ai-sdk/svelte';
 	import { onMount } from 'svelte';
 	import { MessageCircle, Copy } from '@lucide/svelte';
 
 	let { updateNodeData } = useSvelteFlow();
 
-	let { id, data } = $props();
+	let { id, data, selected } = $props();
 
 	const completion = new Completion({
 		api: '/api/completion',
@@ -35,10 +35,10 @@
 </script>
 
 <div
-	class="w-full max-w-[500px] min-w-[300px] rounded-xl border border-gray-200 bg-white shadow-md"
+	class="w-full h-full flex flex-col rounded-xl border border-gray-200 bg-white shadow-md"
 >
 	<Handle type="target" position={Position.Left} />
-	<div class="flex items-center justify-between p-3 border-b border-neutral-200">
+	<div class="flex items-center justify-between border-b border-neutral-200 p-3">
 		<button
 			class="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 text-sm shadow"
 		>
@@ -47,9 +47,9 @@
 		>
 	</div>
 
-	<div class="nodrag nowheel max-h-[300px] overflow-y-auto p-3">
+	<div class="nodrag nowheel flex-grow overflow-y-auto p-3">
 		{#if !completion.completion}
-			<div class="flex gap-2 items-center text-gray-400">
+			<div class="flex items-center gap-2 text-gray-400">
 				<div class="loader"></div>
 				<span>Loading model</span>
 			</div>
@@ -70,3 +70,13 @@
 
 	<Handle type="source" position={Position.Right} class="custom-handle" />
 </div>
+<NodeResizer
+	isVisible={selected}
+	minWidth={300}
+	maxWidth={600}
+	minHeight={140}
+	maxHeight={400}
+	color="#4480FF"
+	class="rounded-4xl"
+	handleStyle="width: 14px; height: 14px; background: rgb(255, 64, 0); border-radius: 8px; border: 2px solid white;"
+/>

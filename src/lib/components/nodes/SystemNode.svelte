@@ -4,15 +4,16 @@
 		Position,
 		useSvelteFlow,
 		NodeResizeControl,
+		NodeResizer,
 		type NodeProps
 	} from '@xyflow/svelte';
 	import NodeTypePicker from '../ui/node-type-picker/NodeTypePicker.svelte';
-	let { id, type }: NodeProps = $props();
+	let { id, type, selected }: NodeProps = $props();
 	let { updateNodeData } = useSvelteFlow();
 </script>
 
 <div
-	class="flex h-full w-full min-w-[300px] flex-col divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white shadow-md"
+	class="flex h-full w-full max-w-[600px] flex-col divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white shadow-md"
 >
 	<div class="flex items-center justify-between p-3">
 		<NodeTypePicker {id} {type} />
@@ -26,6 +27,14 @@
 	</div>
 
 	<Handle type="source" position={Position.Right} class="custom-handle" style="top:32px" />
-	<NodeResizeControl minWidth={300} maxWidth={600} minHeight={200} maxHeight={400}
-	></NodeResizeControl>
 </div>
+<NodeResizer
+	isVisible={selected}
+	minWidth={300}
+	maxWidth={600}
+	minHeight={140}
+	maxHeight={400}
+	color="#4480FF"
+	class="rounded-4xl"
+	handleStyle="width: 14px; height: 14px; background: rgb(255, 64, 0); border-radius: 8px; border: 2px solid white;"
+/>

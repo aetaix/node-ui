@@ -20,7 +20,8 @@
 		{
 			id: 'initial-llm',
 			type: 'llm',
-			position: { x: 450, y: 0 },
+			position: { x: 40, y: 0 },
+			
 			data: { label: 'llm', model: '', prompt: '', system: '' }
 		}
 	];
@@ -42,6 +43,10 @@
 		nodes = [...nodes, newNode];
 	}
 </script>
+
+<svelte:head>
+	<title>nodeUI - AI Node Editor</title>
+</svelte:head>
 
 <div class="h-screen w-full">
 	<SvelteFlow bind:nodes bind:edges fitView {nodeTypes}>

@@ -120,14 +120,7 @@
   }
 }
 
-/* Flow */
-.svelte-flow__node.selected {
-  @apply outline! outline-2! outline-gray-400!;
-}
 
-.svelte-flow__node {
-  @apply rounded-xl;
-}
 
 .custom-handle {
   @apply w-2! h-4! rounded-none! bg-gray-400!;
